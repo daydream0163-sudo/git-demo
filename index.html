@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>你好世界 · 优雅呈现</title>
+  <!-- 使用现代无衬线字体，提升美感 -->
+  <style>
+    /* 基础重置与全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      /* 柔和的多层渐变背景，营造深邃而温暖的氛围 */
+      background: linear-gradient(145deg, #1a1e2b 0%, #2a3140 40%, #3b4252 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 装饰性光晕背景元素，增加层次感 */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255, 215, 150, 0.12) 0%, rgba(0, 0, 0, 0) 45%),
+                  radial-gradient(circle at 80% 70%, rgba(130, 170, 255, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 主卡片容器 — 采用玻璃拟态效果，呈现精致质感 */
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border-radius: 3.5rem;
+      padding: 4rem 3.5rem;
+      box-shadow: 
+        0 30px 50px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+      max-width: 90vw;
+      width: 550px;
+    }
+
+    /* 轻微悬停效果，增加互动感 */
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 
+        0 40px 65px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    /* 装饰性圆环或抽象图形，提升视觉趣味 */
+    .decor {
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .circle {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .circle:nth-child(1) {
+      background: #ffb7a7;
+      box-shadow: 0 0 18px #ff8a7a;
+    }
+    .circle:nth-child(2) {
+      background: #ffd89a;
+      box-shadow: 0 0 18px #ffb86c;
+      width: 18px;
+      height: 18px;
+    }
+    .circle:nth-child(3) {
+      background: #a7c7ff;
+      box-shadow: 0 0 18px #6c8cff;
+    }
+
+    /* “Hello World” 主文字样式 */
+    .greeting {
+      font-size: clamp(3.8rem, 12vw, 6.5rem);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #f9f3e7 0%, #e2d9c5 30%, #ffffff 70%, #d4c9b0 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.4), 0 2px 5px rgba(255, 255, 200, 0.5);
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+      transition: all 0.3s ease;
+    }
+
+    /* 辅助装饰文字（可选，保持简洁但又增加一点细节） */
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: rgba(255, 255, 245, 0.7);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin-top: 0.5rem;
+      transition: color 0.3s, background 0.3s;
+    }
+
+    .subtitle:hover {
+      color: rgba(255, 255, 250, 0.95);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* 响应式调整：小屏幕上内边距适当缩小 */
+    @media (max-width: 500px) {
+      .card {
+        padding: 2.8rem 1.8rem;
+        border-radius: 3rem;
+      }
+      .greeting {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- 装饰性小圆点，提升设计感 -->
+    <div class="decor">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    
+    <!-- 核心文字：Hello World -->
+    <h1 class="greeting">Hello World</h1>
+    
+    <!-- 一行细微的装饰文字，让界面更完整，但不抢眼 -->
+    <p class="subtitle">✦ 每一天都值得 ✦</p>
+  </div>
+
+  <!-- 
+    此HTML文件完全自包含，无需任何外部资源。
+    设计思路：采用深色渐变背景与玻璃拟态卡片，
+    通过渐隐光晕、柔和阴影和文字渐变效果，
+    打造简洁而富有现代感的视觉体验。
+    整体布局居中，只突出显示“Hello World”。
+  -->
+</body>
+</html>
